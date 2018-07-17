@@ -1,0 +1,30 @@
+##############################################
+# Syntax Coloring Map For DCMotorBot #
+##############################################
+
+##############################################
+# Datatypes (KEYWORD1)
+##############################################
+
+Doll	KEYWORD1
+
+##############################################
+# Methods and Functions (KEYWORD2)
+##############################################
+
+
+addPosition    KEYWORD2
+effect         KEYWORD2
+moveToPosition KEYWORD2
+start          KEYWORD2
+setPin         KEYWORD2
+getPosition    KEYWORD2
+targetPosition KEYWORD2
+moveUp         KEYWORD2
+moveDown       KEYWORD2
+moveStop       KEYWORD2
+    
+
+##############################################
+# Constants (LITERAL1)
+##############################################
