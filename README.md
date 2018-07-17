@@ -32,8 +32,6 @@ The following is the pin out diagram of the IC.
 
 ![](datasheet/l293d-pinout.png)
 
-_TODO_: Add more details and schematics.
-
 ## License
 No licence
 

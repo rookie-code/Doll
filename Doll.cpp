@@ -1,6 +1,7 @@
 #include <Doll.h>
 #include <arduino.h>
 
+
 Doll::Doll(byte _pinDirection, byte  _pinPower, byte _pinResistor){
     pinDirection = _pinDirection;
     pinPower = _pinPower;
@@ -10,37 +11,31 @@ Doll::Doll(byte _pinDirection, byte  _pinPower, byte _pinResistor){
 }
 
 
-void Doll::addPosition(String namePosition, int resistorPosition){
-    
-    for(int x = 0; x <= 10; x++){
-        if(!positions[x].namePosition){
-            positions[x].namePosition = namePosition;
-            positions[x].namePosition = resistorPosition;
-            break;
-        }
-        
-    }
+void Doll::addPosition(int position, int resistorPosition){
+    positions[position]= resistorPosition;
 };          
 
 
 void Doll::effect(){};   
 
 
-void Doll::moveToPosition(String namePosition, int speed){
-    int targetP = targetPosition(namePosition);
-    actualPosition = getPosition();
-    
+void Doll::moveToPosition(int position, int _speed){
+    int targetP = targetPosition(position);
+    int actualPosition = getPosition();
+    Serial.println(String(targetP));
     if(targetP >= actualPosition){
-        moveDown(255);
+        moveDown(_speed);
         while(actualPosition <= targetP){
             actualPosition = getPosition();
+            Serial.println(String(actualPosition));
         }
         moveStop();
     };
     if(targetP <= actualPosition){
-        moveUp(255);
+        moveUp(_speed);
         while(actualPosition >= targetP){
             actualPosition = getPosition();
+            Serial.println(String(actualPosition));
         }
         moveStop();
     };
@@ -61,38 +56,38 @@ void Doll::start(int _zero, int _minPosition, int _maxPosition){
     zero = _zero;
     minPosition = _minPosition;
     maxPosition = _maxPosition;
-    addPosition("zero", zero);
+    addPosition(1, zero);
+    Serial.println("move to position");
+    moveToPosition(1, 100);
 
 };          
 
 
 int Doll::getPosition(){
-    return analogRead(pinResistor);
+    int resistor = analogRead(pinResistor);
+    return map(resistor,0, 1023, minPosition, maxPosition);
 };          
 
 
-int Doll::targetPosition(String _namePosition){
-    for(int i = 0; i = 10; i++){
-        if(positions[i].namePosition == _namePosition){
-            return positions[i].resistorPosition;
-        }
-    }
+int Doll::targetPosition(int position){
+    Serial.println("targetPosition");
+    Serial.println(String(positions[position]));
+    return positions[position];
 };
 
 
 void Doll::moveUp(int speed){
     digitalWrite(pinDirection, HIGH);
     analogWrite(pinPower, speed);
-    delay(200);
-    moveStop();
+    
+    
 };
 
 
 void Doll::moveDown(int speed){
     digitalWrite(pinDirection, LOW);
     analogWrite(pinPower, speed); 
-    delay(200);
-    moveStop();   
+     
 };
 
 void Doll::moveStop(){
