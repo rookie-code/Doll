@@ -1,9 +1,9 @@
-#ifndef Doll_h
-#define Doll_h
+#ifndef DollMotor_h
+#define DollMotor_h
 #include<arduino.h>
 using namespace std;
 
-class Doll{
+class DollMotor{
     private:
         String actionName;     // il nome della funzione del motore es aziona bocca
         int status;            // la posizione in cui è
@@ -20,7 +20,7 @@ class Doll{
 
 
     public:
-        Doll(byte _pinDirection, byte  _pinPower, byte _pinResistor); // constructor
+        DollMotor(byte _pinDirection, byte  _pinPower, byte _pinResistor); // constructor
         void addPosition(int position, int resistorPosition);            // es. "sorriso" 20 
         void effect();                                                          // effetti da aggiungere dalla posizione di riferimento es. vibro etc.
         void moveToPosition(int position, int speed);                              // indicando la il nome della posizione il motore si muove per raggiungerla

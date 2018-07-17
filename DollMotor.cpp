@@ -1,8 +1,8 @@
-#include <Doll.h>
+#include <DollMotor.h>
 #include <arduino.h>
 
 
-Doll::Doll(byte _pinDirection, byte  _pinPower, byte _pinResistor){
+DollMotor::DollMotor(byte _pinDirection, byte  _pinPower, byte _pinResistor){
     pinDirection = _pinDirection;
     pinPower = _pinPower;
     pinResistor = _pinResistor;
@@ -11,15 +11,15 @@ Doll::Doll(byte _pinDirection, byte  _pinPower, byte _pinResistor){
 }
 
 
-void Doll::addPosition(int position, int resistorPosition){
+void DollMotor::addPosition(int position, int resistorPosition){
     positions[position]= resistorPosition;
 };          
 
 
-void Doll::effect(){};   
+void DollMotor::effect(){};   
 
 
-void Doll::moveToPosition(int position, int _speed){
+void DollMotor::moveToPosition(int position, int _speed){
     int targetP = targetPosition(position);
     int actualPosition = getPosition();
     Serial.println(String(targetP));
@@ -43,7 +43,7 @@ void Doll::moveToPosition(int position, int _speed){
 };
 
 // enable pin for motor
-void Doll::setPin(){
+void DollMotor::setPin(){
     
     
     pinMode(pinDirection, OUTPUT);
@@ -52,7 +52,7 @@ void Doll::setPin(){
 };
 
 // set the property rage of motor escursion and zero position
-void Doll::start(int _zero, int _minPosition, int _maxPosition){
+void DollMotor::start(int _zero, int _minPosition, int _maxPosition){
     zero = _zero;
     minPosition = _minPosition;
     maxPosition = _maxPosition;
@@ -63,20 +63,20 @@ void Doll::start(int _zero, int _minPosition, int _maxPosition){
 };          
 
 
-int Doll::getPosition(){
+int DollMotor::getPosition(){
     int resistor = analogRead(pinResistor);
     return map(resistor,0, 1023, minPosition, maxPosition);
 };          
 
 
-int Doll::targetPosition(int position){
+int DollMotor::targetPosition(int position){
     Serial.println("targetPosition");
     Serial.println(String(positions[position]));
     return positions[position];
 };
 
 
-void Doll::moveUp(int speed){
+void DollMotor::moveUp(int speed){
     digitalWrite(pinDirection, HIGH);
     analogWrite(pinPower, speed);
     
@@ -84,13 +84,13 @@ void Doll::moveUp(int speed){
 };
 
 
-void Doll::moveDown(int speed){
+void DollMotor::moveDown(int speed){
     digitalWrite(pinDirection, LOW);
     analogWrite(pinPower, speed); 
      
 };
 
-void Doll::moveStop(){
+void DollMotor::moveStop(){
     analogWrite(pinPower, 0); 
 };
          

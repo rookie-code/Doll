@@ -6,7 +6,7 @@
 # Datatypes (KEYWORD1)
 ##############################################
 
-Doll	KEYWORD1
+DollMotor	KEYWORD1
 
 ##############################################
 # Methods and Functions (KEYWORD2)
