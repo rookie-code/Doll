@@ -44,4 +44,3 @@ If you would like to contribute to this project, then just fork it in github and
 
 - Add detailed schematics
 - Add  examples
-- Add keywords file
